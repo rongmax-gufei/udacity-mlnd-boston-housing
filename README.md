@@ -1,5 +1,5 @@
-# Udacity Machine Learning Nanodegree：模型评估与验证
-## 波士顿房价预测
+# Udacity Machine Learning Nanodegree
+## 模型评估与验证：波士顿房价预测
 
 ### 准备工作
 
