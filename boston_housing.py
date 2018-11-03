@@ -101,7 +101,7 @@ print("Standard deviation of prices: ${:.2f}".format(std_price))
 # 
 # **提示：**你预期一个`'RM'` 值是6的房屋跟`'RM'` 值是7的房屋相比，价值更高还是更低呢？
 
-# In[5]:
+# In[4]:
 
 
 import matplotlib.pyplot as plt
@@ -139,7 +139,7 @@ for i, key in enumerate(dataset):
 # - 使用 `sklearn.metrics` 中的 [`r2_score`](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html) 来计算 `y_true` 和 `y_predict` 的 $R^2$ 值，作为对其表现的评判。
 # - 将他们的表现评分储存到 `score` 变量中。
 
-# In[8]:
+# In[5]:
 
 
 # TODO: Import 'r2_score'
@@ -178,7 +178,7 @@ def performance_metric(y_true, y_predict):
 # * $R^2$ 在0到1之间表示因变量可预测的程度。
 # * $R^2$ 为0.40意味着 Y 中40％的方差可以从 X 预测。
 
-# In[9]:
+# In[6]:
 
 
 # Calculate the performance of this model
@@ -199,7 +199,7 @@ print("Model has a coefficient of determination, R^2, of {:.3f}.".format(score))
 #   - 选定一个数值以设定 `train_test_split` 中的 `random_state` ，这会确保结果的一致性；
 # * 将分割后的训练集与测试集分配给 `X_train`, `X_test`, `y_train` 和 `y_test`。
 
-# In[10]:
+# In[7]:
 
 
 # TODO: Import 'train_test_split'
@@ -233,7 +233,7 @@ print("Training and testing split was successful.")
 # 
 # 运行下方区域中的代码，并利用输出的图形回答下面的问题。
 
-# In[12]:
+# In[8]:
 
 
 # Produce learning curves for varying training set sizes and maximum depths
@@ -257,7 +257,7 @@ vs.ModelLearning(features, prices)
 # 
 # **运行下方区域中的代码，并利用输出的图形并回答下面的问题5与问题6。**
 
-# In[13]:
+# In[9]:
 
 
 vs.ModelComplexity(X_train, y_train)
@@ -308,10 +308,10 @@ vs.ModelComplexity(X_train, y_train)
 # 在考虑k-fold交叉验证如何帮助网格搜索时，你可以使用特定的数据子集来进行训练与测试有什么缺点，以及K折交叉验证是如何帮助缓解这个问题。
 
 # ### 问题 8 - 回答：
-# - K折交叉验证 在 k 折交叉验证中，将训练集数据平分到大小相同的 k 个容器内，运行 k 次单独的学习试验，每次实验中，从 k 个子集中挑选一个作为验证集，剩下的 k-1 个容器作为训练集，交叉验证的要点是，这个操作会执行多次，将 k 次实验测试结果取平均值，虽然比较耗时，但是学习算法的评估将更加准确
+# - k 折交叉验证法即将数据集分成 k 个子集，每个子集均做一次测试集，其余的作为训练集。如此交叉验证重复 k 次，每次选择一个子集作为测试集，并将 k 次的平均交叉验证识别率作为结果。 
 # - GridSearchCV 传入交叉验证 cv 参数，设置为 k 折交叉验证。对训练集训练完成后调用 bestparams 变量，打印出训练的最佳参数组
 # - 'cv_results_' 保存不同超参数的组合方式，其计算结果以字典的形式保存
-# 网格搜索时如果不使用交叉验证，很难得到最优模型参数，但训练时间较短，交叉验证对每个参数组合进行训练，得到的模型比较准确
+# - 网格搜索算法的本质其实就是穷举，穷举所有的提供的超参的组合情况，并验证模型基于每组参数的表现以达到挑选最优参数组合的目的。网格搜索时使用 k 折交叉验证的优点在于所有的样本都被作为了训练集和测试集，每个样本都被验证了一次，使得模型泛化能力达到最优。 
 
 # ### 编程练习 4：拟合模型
 # 在这个练习中，你将需要将所学到的内容整合，使用**决策树算法**训练一个模型。为了得出的是一个最优模型，你需要使用网格搜索法训练模型，以找到最佳的 `'max_depth'` 参数。你可以把`'max_depth'` 参数理解为决策树算法在做出预测前，允许其对数据提出问题的数量。决策树是**监督学习算法**中的一种。
@@ -328,7 +328,7 @@ vs.ModelComplexity(X_train, y_train)
 #   
 # 如果你对 Python 函数的默认参数定义和传递不熟悉，可以参考这个MIT课程的[视频](http://cn-static.udacity.com/mlnd/videos/MIT600XXT114-V004200_DTH.mp4)。
 
-# In[22]:
+# In[10]:
 
 
 # TODO: Import 'make_scorer', 'DecisionTreeRegressor', and 'GridSearchCV'
@@ -374,7 +374,7 @@ def fit_model(X, y):
 # 
 # 运行下方区域内的代码，将决策树回归函数代入训练数据的集合，以得到最优化的模型。
 
-# In[23]:
+# In[11]:
 
 
 # Fit the training data to the model using grid search
@@ -403,7 +403,7 @@ print("Parameter 'max_depth' is {} for the optimal model.".format(reg.get_params
 # 
 # 运行下列的代码区域，使用你优化的模型来为每位客户的房屋价值做出预测。
 
-# In[24]:
+# In[12]:
 
 
 # Produce a matrix for client data
@@ -419,7 +419,7 @@ for i, price in enumerate(reg.predict(client_data)):
 # ### 问题 10 - 回答：
 # - 建议客户1的房屋销售价格为：\$411,931.58，此价格介于客户2和客户3之间，与特征数据吻合，比较合理
 # - 建议客户2的房屋销售价格为：\$235,620.00，贫困指数最大，学生/老师比例最大，教育投入较少，价格最低合理
-# - 建议客户3的房屋销售价格为：\$922,740.00，房屋最多，贫困指数最小，学生/老师比例最小，教育资源最优，房价最高合理
+# - 建议客户3的房屋销售价格为：\$922,740.00，房屋内房间总数最多，建造成本上升，房屋总价越高；贫困指数最小，富人聚集的越多，房价较贫困区也相应增加；根据数据分析：PTRATIO 与 MEDV 相关性不明显，PTRATIO 比例越大，MEDV 在部分区间内下降，由此学生和老师的比例会在一定程度上影响房价，但是不会对房价中位数造成很明显的影响。
 
 # ### 编程练习 5
 # 你刚刚预测了三个客户的房子的售价。在这个练习中，你将用你的最优模型在整个测试数据上进行预测, 并计算相对于目标变量的决定系数 $R^2$ 的值。
@@ -430,7 +430,7 @@ for i, price in enumerate(reg.predict(client_data)):
 # * 参考问题2的代码来计算R^2的值。
 # 
 
-# In[27]:
+# In[13]:
 
 
 # TODO Calculate the r2 score between 'y_true' and 'y_predict'
@@ -458,7 +458,7 @@ print("Optimal model has R^2 score {:,.2f} on test data".format(r2))
 # 
 # **提示**: 执行下方区域中的代码，采用不同的训练和测试集执行 `fit_model` 函数10次。注意观察对一个特定的客户来说，预测是如何随训练数据的变化而变化的。
 
-# In[28]:
+# In[14]:
 
 
 vs.PredictTrials(features, prices, fit_model, client_data)
