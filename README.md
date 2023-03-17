@@ -1,6 +1,8 @@
 # Udacity Machine Learning Nanodegree
 ## 模型评估与验证：波士顿房价预测
 
+- 科学上网：https://yoga.codepay.online/auth/register?code=0a73e30131 每日签到，免费赠送流量
+
 ### 准备工作
 
 这个项目需要安装**Python 2.7**和以下的Python函数库：
